@@ -6,25 +6,24 @@ independencia.
 
 ## Flujo de trabajo
 
-```text
-Parámetros del generador
-(semilla, a, c, m, n=120)
-          |
-          v
-generar_congruencial_lineal.py
-          |
-          v
-Muestra R1 ... R120, con valores en [0, 1)
-          |
-          +--> pruebaMedias.py ----------------------> media muestral
-          +--> pruebaVarianza.py --------------------> varianza muestral
-          +--> pruebaUniformidadChiCuadrado.py ------> frecuencias por intervalo
-          +--> PruebaUniformidadKolmogorovSmirnov.py -> distancia D
-          +--> pruebaUniformidadAndersonDarling.py --> estadístico A² ajustado
-          +--> PruebaIndependenciaCorridas.py -------> cantidad de corridas
-                                                       |
-                                                       v
-                                      Estadístico, valor crítico y decisión
+```mermaid
+flowchart TD
+    A["Parámetros: semilla, a, c, m, n = 120"] --> B["generar_congruencial_lineal.py"]
+    B --> C["Muestra R1 ... R120<br/>valores en [0, 1)"]
+
+    C --> D["pruebaMedias.py"]
+    C --> E["pruebaVarianza.py"]
+    C --> F["pruebaUniformidadChiCuadrado.py"]
+    C --> G["PruebaUniformidadKolmogorovSmirnov.py"]
+    C --> H["pruebaUniformidadAndersonDarling.py"]
+    C --> I["PruebaIndependenciaCorridas.py"]
+
+    D --> D1["Media muestral, estadístico,<br/>valor crítico y decisión"]
+    E --> E1["Varianza muestral, estadístico,<br/>valor crítico y decisión"]
+    F --> F1["Frecuencias, estadístico,<br/>valor crítico y decisión"]
+    G --> G1["Distancia D, valor crítico<br/>y decisión"]
+    H --> H1["A² ajustado, valor crítico<br/>y decisión"]
+    I --> I1["Número de corridas, estadístico,<br/>valor crítico y decisión"]
 ```
 
 La muestra es la entrada común de las pruebas: cada una calcula un estadístico,
